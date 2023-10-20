@@ -4,6 +4,8 @@ Para el que no conoce al crack: https://en.wikipedia.org/wiki/Magnus_Carlsen
 
 Y Magnus derrotando a jugadores de alto nivel con unas copas encima: https://www.youtube.com/watch?v=K-Kz7bo5tKE
 
+Recuerden instalar pygame! `pip install pygame`.
+
 ## Reglas de juego
 Para hacer este ejercicio, tienen que saber como se mueven las piezas de ajedrez y como se cuentan los puntos. Esto se encuentra libremente en internet.
 
