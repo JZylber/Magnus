@@ -35,7 +35,7 @@ Define la clase tablero a ser usada en el juego. Cuenta con diversos métodos pa
 
 Cuenta con la lógica de máquina de estados necesaria para el desarrollo del juego. Van a tener que modificar algunas cosas para el punto final. Dejo la lógica de los estados a continuación:
 
-![Diagrama de Estados](https://drive.google.com/file/d/1x5A9OYEZlr0iTp9R-V5T_h0dyos0ufxM/view?usp=share_link)
+![Diagrama de Estados](https://drive.google.com/uc?export=view&id=1x5A9OYEZlr0iTp9R-V5T_h0dyos0ufxM)
 
 ### Piezas
 
