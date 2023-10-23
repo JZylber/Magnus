@@ -17,26 +17,62 @@ En este ajedrez rudimentario no tomamos en cuenta:
 
 Sin embargo, con el diseño con objetos, ¡Al finalizar el ejercicio puede que se imaginen como implementar esas funciones!
 
-## Piezas
+## Especificaciones del programa
+
+El programa cuenta con distintos archivos que tienen distintas partes del programa
+
+### Ajedrez
+
+Este archivo cuenta con todo lo necesario para correr la interfaz gráfica. Usa la librería pygame, y es el archivo que tienen que correr para ver la interfaz. A diferencia de todo el resto del programa, está pensado más con una lógica funcional que con P.O.O.
+
+### Tablero
+
+Define la clase tablero a ser usada en el juego. Cuenta con diversos métodos para obtener y mover piezas. No hace falta que le realicen ninguna modificación
+
+**IMPORTANTE:** Las posiciones `(x,y)` en el tablero no son las tradicionales de los ejes cartesianos. `x` es fila e `y` columna, por lo tanto, `x` sería el eje vertical e `y` el horizontal.
+
+### Lógica
+
+Cuenta con la lógica de máquina de estados necesaria para el desarrollo del juego. Van a tener que modificar algunas cosas para el punto final. Dejo la lógica de los estados a continuación:
+
+![Diagrama de Estados](https://drive.google.com/file/d/1x5A9OYEZlr0iTp9R-V5T_h0dyos0ufxM/view?usp=share_link)
+
+### Piezas
+
+Declaración y lógica de las piezas de ajedrez. Hay alguna piezas ya hechas, y otras que tiene que completar/arreglar en ciertos puntos de la consigna.
+
+### Jugador
+
+Declaración y constructor incompleto de la clase `Jugador`, a ser completada en el punto de la consigna correspondiente.
+
+### Tests
+
+Están los tests separados en 2 archivos, para que no sea un mega archivo y mas o menos se separen por temas, pero pueden correr todos juntos con `python -m pytest`. Pueden correr tests individuales usando los comandos que se incluyen en cada punto de la consigna. 
+
+## Consigna
+
+### Piezas
 
 Para este ejercicio, pueden asumir que la pieza está en la posición que dice estar, y que las posiciones son válidas (es decir, no caen fuera del tablero).
 
-### Torre
-¡La torre no sabe moverse! Completar el método `is_valid_move` de la torre para que sepa como hacerlo. Recordamos que la torre se mueve horizontalmente y verticalmente sin saltar piezas.
-
-Para correr **SOLO** los tests de la torre, usar `python -m pytest test_ajedrez.py::TestPieces::TestRook`
-
-### Alfil
+#### Alfil
 Github Copilot sugirió una solución para implementar el movimiento del alfil, que es la que está en el archivo. Sin embargo, esta no anda. Revisando en internet, el siguiente foro de matemática sugiere la siguiente solución a ese problema: https://math.stackexchange.com/questions/1566115/formula-that-describes-the-movement-of-a-bishop-in-chess. Arreglar/Rehacer el método `is_valid_move` del alfil. Recordamos que el alfil se mueve diagonalmente sin saltar piezas.
 
-Para correr **SOLO** los tests del alfil, usar `python -m pytest test_ajedrez.py::TestPieces::TestBishop` 
+Para correr **SOLO** los tests del alfil, usar `python -m pytest test_piezas.py::TestBishop` 
 
-### Reina
+#### Torre
+¡La torre no sabe moverse! Completar el método `is_valid_move` de la torre para que sepa como hacerlo. Recordamos que la torre se mueve horizontalmente y verticalmente sin saltar piezas. **TIP:** Pueden usar el principio de la solución del alfil para hacer algo parecido. ¡Tal vez convenga partir en movimiento horizontal y vertical por separado!
+
+Para correr **SOLO** los tests de la torre, usar `python -m pytest test_piezas.py::TestRook`
+
+#### Reina
 Ahora, con lo que hicimos con la torre y el alfil, completar el método `is_valid_move` de la reina. Recordamos que la reina se mueve horizontalmente y verticalmente sin saltar piezas.
 
-Para correr **SOLO** los tests de la reina, usar `python -m pytest test_ajedrez.py::TestPieces::TestQueen`
+Para correr **SOLO** los tests de la reina, usar `python -m pytest test_piezas.py::TestQueen`
 
-## Jugadores
+### Jugadores
+
+#### Puntos
 
 De los jugadores no sólo nos importa el color, si no también los puntos y las piezas que fue capturando. Para eso, completen la clase `Jugador` que:
 - Se inicialice con el color (white/black)
@@ -48,4 +84,10 @@ De los jugadores no sólo nos importa el color, si no también los puntos y las 
 - Tenga un método `capture_piece` que reciba una pieza y la capture.
 - Tenga un método `captured_pieces` que no tome parámetros y devuelva una lista de las piezas capturadas por dicho jugador.
 
+Para correr **SOLO** los tests de los puntos, usar `python -m pytest test_jugador.py::TestPoints`
+
+#### Lógica de Juego
+
 Además, deben hacer que el jugador conozca las piezas capturadas. Para eso, deben modificar los estados (`logica.py`) para que el jugador reciba las piezas que va capturando. Piensen, ¿En qué estado tiene sentido que el jugador capture una pieza?
+
+Para correr **SOLO** los tests del estado, usar `python -m pytest test_jugador.py::TestPieceCapture`
