@@ -45,11 +45,20 @@ def draw_board(screen,screen_data,board : Board) -> list[list[pygame.Rect]]:
 
 def draw_player(player: Player, screen, screen_data,  left = True):
     points_font = pygame.font.SysFont("montserrat", 30)
-    label = points_font.render(f"{player.color}: {player.points()}", 1, (0,0,0))
+    points = 0
+    try:
+        points = player.points()
+    except:
+        pass
+    label = points_font.render(f"{player.color}: {points}", 1, (0,0,0))
     side_space = (screen_data["width"] - (screen_data["tile_size"] * 8)) / 2
     center = side_space/2 if left else screen_data["width"] - side_space/2
     screen.blit(label, (center - label.get_width() / 2, 50))
-    captured_pieces = player.captured_pieces()
+    captured_pieces = []
+    try:
+        captured_pieces = player.captured_pieces()
+    except:
+        pass
     for i in range(math.ceil(len(captured_pieces)/4)):
         for j in range(4):
             if i * 4 + j >= len(captured_pieces):
@@ -67,6 +76,7 @@ def clicked_tile(tiles : list[list[pygame.Rect]],position):
 def main(): 
     pygame.init() 
     title_font = pygame.font.SysFont("montserrat", 50)
+    debug_font = pygame.font.SysFont("montserrat", 30)
     SCREEN_WIDTH = 1280
     SCREEN_HEIGHT = 704
     TILE_SIZE = 64
@@ -90,19 +100,37 @@ def main():
     white_player,black_player = Player("white"),Player("black")
     exit = False
     state = TurnStart(white_player,black_player,board,screen_data)
+    debug = False
     while not exit:
+        # Draw turn label
         label = title_font.render(f"{screen_data['player_turn']} turn", 1, (0,0,0))
         pygame.draw.rect(screen, (255,255,255), [0, 0, screen_data["width"], 100])
         screen.blit(label, (screen_data["width"] / 2 - label.get_width() / 2, 10))
+        #Debug mode button
+        debug_button = pygame.draw.rect(screen, (0,0,0), [screen_data["width"] - 200, 10, 175, 30])
+        debug_label = debug_font.render("Debug", 1, (255,255,255))
+        screen.blit(debug_label, (screen_data["width"] - 200 + debug_button.width / 2 - debug_label.get_width() / 2, 12.5 + debug_button.height / 2 - debug_label.get_height() / 2))
+        # Draw players
         draw_player(white_player,screen,screen_data)
         draw_player(black_player,screen,screen_data,False)
+        # Draw board
         tiles = draw_board(screen,screen_data,board)
+        #Draw current position
+        if debug:
+            mouse_position = pygame.mouse.get_pos()
+            current_position = clicked_tile(tiles,mouse_position)
+            debug_label = debug_font.render(f"Posición actual: {current_position if current_position else ''}", 1, (0,0,0))
+            screen.blit(debug_label, (screen_data["width"] / 2 - debug_label.get_width() / 2, 50))
         events = pygame.event.get()
         for event in events: 
             if event.type == pygame.QUIT: 
                 exit = True
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 position = pygame.mouse.get_pos()
+                # Clicked debug button
+                if debug_button.collidepoint(position):
+                    debug = not debug
+                # Clicked tile
                 tile = clicked_tile(tiles,position)
                 if tile:
                     state = state.onClick(tile)
