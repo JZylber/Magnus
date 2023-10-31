@@ -11,9 +11,10 @@ Para hacer este ejercicio, tienen que saber como se mueven las piezas de ajedrez
 
 En este ajedrez rudimentario no tomamos en cuenta:
 - Promoción de fichas (peón a reina)
+- En Passant
+- Enroque
 - Jaques
 - Condiciones de terminación: Jaque Mate, empates, etc.
-- En Passant
 
 Sin embargo, con el diseño con objetos, ¡Al finalizar el ejercicio puede que se imaginen como implementar esas funciones!
 
