@@ -67,7 +67,7 @@ Para correr **SOLO** los tests del alfil, usar `python -m pytest test_piezas.py:
 Para correr **SOLO** los tests de la torre, usar `python -m pytest test_piezas.py::TestRook`
 
 #### Reina
-Ahora, con lo que hicimos con la torre y el alfil, completar el método `is_valid_move` de la reina. Recordamos que la reina se mueve horizontalmente y verticalmente sin saltar piezas.
+Ahora, con lo que hicimos con la torre y el alfil, completar el método `is_valid_move` de la reina. Recordamos que la reina se mueve horizontalmente, verticalmente y diagonalmente sin saltar piezas.
 
 Para correr **SOLO** los tests de la reina, usar `python -m pytest test_piezas.py::TestQueen`
 
