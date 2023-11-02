@@ -29,7 +29,7 @@ def draw_board(screen,screen_data,board : Board) -> list[list[pygame.Rect]]:
     for i in range(8):
         row = []
         for j in range(8):
-            selected = screen_data["selected_tile"] == (i,j)
+            selected = screen_data["selected_tile"] == (7-i,j)
             if (i + j) % 2 == 0:
                 tile = pygame.draw.rect(screen, EVEN_TILE_COLOR if not selected else SELECTED_EVEN_TILE_COLOR, 
                                  [START_X_POSITION + j * TILE_SIZE, START_Y_POSITION + i * TILE_SIZE, TILE_SIZE, TILE_SIZE])
@@ -37,7 +37,7 @@ def draw_board(screen,screen_data,board : Board) -> list[list[pygame.Rect]]:
                 tile = pygame.draw.rect(screen, ODD_TILE_COLOR if not selected else SELECTED_ODD_TILE_COLOR, 
                                  [START_X_POSITION + j * TILE_SIZE, START_Y_POSITION + i * TILE_SIZE, TILE_SIZE, TILE_SIZE])
             row.append(tile)
-            piece = board.get_piece((i,j))
+            piece = board.get_piece((7-i,j))
             if piece:
                 draw_tile_piece(screen,screen_data,piece,(i,j))
         tiles.append(row)
@@ -70,7 +70,7 @@ def clicked_tile(tiles : list[list[pygame.Rect]],position):
     for i in range(8):
         for j in range(8):
             if tiles[i][j].collidepoint(position):
-                return (i,j)
+                return (7-i,j)
     return None
 
 def main(): 

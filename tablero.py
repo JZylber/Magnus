@@ -5,13 +5,13 @@ class Board:
         self.board = []
         if not clear:
             #White pieces
-            self.board.append([Rook("white"), Knight("white"), Bishop("white"), Queen("white"), King("white"), Bishop("white"), Knight("white"), Rook("white")])
+            self.board.append([Rook("white"), Knight("white"), Bishop("white"), King("white"), Queen("white"), Bishop("white"), Knight("white"), Rook("white")])
             self.board.append([Pawn("white") for _ in range(8)])
             for _ in range(4):
                 self.board.append([None for _ in range(8)])
             #Black pieces
             self.board.append([Pawn("black") for _ in range(8)])
-            self.board.append([Rook("black"), Knight("black"), Bishop("black"), Queen("black"), King("black"), Bishop("black"), Knight("black"), Rook("black")])
+            self.board.append([Rook("black"), Knight("black"), Bishop("black"), King("black"), Queen("black"), Bishop("black"), Knight("black"), Rook("black")])
         else:
             for _ in range(8):
                 self.board.append([None for _ in range(8)])
