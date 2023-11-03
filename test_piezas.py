@@ -83,6 +83,13 @@ class TestRook:
         clean_board.set_piece((3,3),Rook("white"))
         clean_board.set_piece((3,4),Pawn("white"))
         assert not clean_board.move_piece((3,3),(3,5))[0]
+    @staticmethod
+    def test_rook_cannot_move_diagonally(clean_board):
+        clean_board.set_piece((3,3),Rook("white"))
+        assert not clean_board.move_piece((3,3),(5,5))[0]
+        assert not clean_board.move_piece((3,3),(5,1))[0]
+        assert not clean_board.move_piece((3,3),(1,1))[0]
+        assert not clean_board.move_piece((3,3),(1,5))[0]
 class TestBishop:
     @staticmethod
     def test_bishop_into_empty_tile_north_west(clean_board):
@@ -160,6 +167,13 @@ class TestBishop:
         clean_board.set_piece((3,3),Bishop("white"))
         clean_board.set_piece((4,4),Pawn("white"))
         assert not clean_board.move_piece((3,3),(6,6))[0]
+    @staticmethod
+    def test_bishop_cannot_move_straight(clean_board):
+        clean_board.set_piece((3,3),Bishop("white"))
+        assert not clean_board.move_piece((3,3),(5,3))[0]
+        assert not clean_board.move_piece((3,3),(1,3))[0]
+        assert not clean_board.move_piece((3,3),(3,5))[0]
+        assert not clean_board.move_piece((3,3),(3,1))[0]
 class TestQueen:
     @staticmethod
     def test_queen_into_empty_tile_north(clean_board):
