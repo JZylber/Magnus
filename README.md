@@ -89,6 +89,10 @@ Para correr **SOLO** los tests de los puntos, usar `python -m pytest test_jugado
 
 #### Lógica de Juego
 
-Además, deben hacer que el jugador conozca las piezas capturadas, ya que en este momento los estados no actualizan al jugador cada vez que se come una pieza. Para eso, deben modificar dichos estados (`logica.py`) para que el jugador reciba las piezas que va capturando. Piensen, ¿En qué estado tiene sentido que el jugador capture una pieza? **TIP:** Los jugadores están en los atributos `player` y `oponent` del estado.
+Lo siguiente es un diagrama de como interactúan las distintas partes del juego:
+
+![Lógica de Juego](https://github.com/JZylber/Magnus/blob/51ebb076b48dc11308a816d4be4c7ccff3fed9fc/assets/Logica.png?raw=true)
+
+Como muestra el diagrama, falta la conexión entre la lógica de juego (máquina de estados) y el jugador. En particular, los estados deberían informarle a los jugadores las piezas que van siendo capturadas. Es por eso que la interfaz no refleja ni los puntos ni las piezas capturadas, es información que va a buscar al jugador y el jugador no tiene. Para eso, deben modificar dichos estados (`logica.py`) para que el jugador reciba las piezas que va capturando. Piensen, ¿En qué estado tiene sentido que el jugador capture una pieza? **TIP:** Los jugadores están en los atributos `player` y `oponent` del estado.
 
 Para correr **SOLO** los tests del estado, usar `python -m pytest test_jugador.py::TestPieceCapture`
