@@ -56,7 +56,7 @@ class TestCapturedPieces:
             player.capture_piece(piece)
         captured_pieces = player.captured_pieces()
         for piece in captured_pieces:
-            assert piece in pieces
+            assert len(list(filter(lambda p: p.name == piece.name and p.color == piece.color,pieces))) == 1
 class TestPieceCapture:
     @staticmethod
     def test_piece_capture_none(clean_board:Board):
@@ -75,8 +75,7 @@ class TestPieceCapture:
         clean_board.set_piece((1,0),piece_to_capture)
         state = PieceSelected(white_player,black_player,(0,0),clean_board,{})
         state = state.onClick((1,0))
-        assert len(white_player.captured_pieces()) == 1
-        assert piece_to_capture in white_player.captured_pieces()
+        assert len(list(filter(lambda piece: piece.name == "pawn" and piece.color == "black", white_player.captured_pieces()))) == 1
         assert len(black_player.captured_pieces()) == 0
         assert isinstance(state,TurnStart)
     @staticmethod
